@@ -1,5 +1,5 @@
 #here are brief descriptions of the code and data associated with Woodruff 2019 "Patterns of putative gene loss suggest rampant developmental system drift in nematodes"
-
+#if there are any questions about this please contact me at gavincw@uoregon.edu
 
 #these are versions of all retreived sequences and annotations
 retrieved_genomes_versions.txt
@@ -39,7 +39,7 @@ replace_seq_ids.sh
 best_reciprocal_blast_hits.zip
 
 
-#this script extracts sequences from a multifasta file
+#this script extracts sequences from a multifasta file (not my original script)
 fasta_filter.pl
 
 
