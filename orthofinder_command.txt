@@ -1,0 +1,5 @@
+#set directory with blast results, these are in orthofinder_and_blast_results.zip
+blast_dir="/projects/phillipslab/gavincw/lost_protein_project_1-5-17/05_orthofinder/Results_Jan06/WorkingDirectory/"
+
+#run orthofinder
+./orthofinder -b $blast_dir -a 10

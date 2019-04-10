@@ -1,0 +1,6 @@
+
+#this was done for all 16,713 seed alignments in the Pfam database. The elegans protein set is made from retreived proteins and prepare_protein_sets.sh
+
+#this is done in a directory with hmm's for every domain in Pfam (these are the $i's). All domains are searched among all elegans predicted proteins.
+
+for i in *; do hmmsearch --tblout /projects/phillipslab/gavincw/pfam_1-10-18/03_hmmsearch_out/elegans/$i $i elegans_proteins.fa; done
