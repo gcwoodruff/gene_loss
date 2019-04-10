@@ -47,10 +47,6 @@ fasta_filter.pl
 filter_tblastn_hits.sh
 
 
-#these are the blast databases used for tblastn
-genome_blast_db.zip
-
-
 #these are the tblastn commands
 tblastn_commands.txt
 
