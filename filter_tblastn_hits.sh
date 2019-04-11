@@ -19,6 +19,8 @@ mkdir $wkdir/05_comm
 mkdir $wkdir/05_comm/all_caeno
 mkdir $wkdir/05_comm/elegans_group
 
+#files in directory /02_elegans_constituents_of_lost_orthogroups/ are made with get_species-specific_gene_losses.sh
+
 #all caeno
 
 cd $wkdir/02_elegans_constituents_of_lost_orthogroups/all_caeno
