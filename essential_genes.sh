@@ -33,16 +33,14 @@ grep -v "N.A.,N.A." phenotype_2 > genes_with_phenotypes
 #get essential phenotypes
 	#essential phenotypes are in file essential_phenotypes.txt
 
-cp /projects/phillipslab/gavincw/lost_protein_project_1-5-17/11_phenotypes/essential_phenotypes $wkdir/essential_genes/00_phenotypes/essential_phenotypes
-
 #replace underscores with spaces
 
-perl -p -i -e 's/_/ /g' essential_phenotypes
+perl -p -i -e 's/_/ /g' essential_phenotypes.txt
 
 
 #get genes with only essential phenotypes
 
-LC_ALL=C fgrep -w -f essential_phenotypes phenotype_2 > genes_with_essential_phenotypes &
+LC_ALL=C fgrep -w -f essential_phenotypes.txt phenotype_2 > genes_with_essential_phenotypes &
 
 
 #get lists...
