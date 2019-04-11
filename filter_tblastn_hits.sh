@@ -2,7 +2,7 @@
 wkdir="/projects/phillipslab/gavincw/reproducing_lost_genes_1-22-19/lost_genes_post_of"
 
 
-#get just the first column
+#get just the first column, which has the best reciprocal blastp hits
 
 mkdir $wkdir/04_awk_rbh
 
