@@ -1,3 +1,5 @@
+#this filters out best-reciprocal blastp hits and tblastn hits that fall outside of predicted coding regions from the species-specific lost orthogroups
+
 #set working directory
 wkdir="/projects/phillipslab/gavincw/reproducing_lost_genes_1-22-19/lost_genes_post_of"
 
