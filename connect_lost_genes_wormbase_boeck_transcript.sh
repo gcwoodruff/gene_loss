@@ -16,11 +16,11 @@ cp elegans_constituents_of_lost_og_all_caeno $wkdir/reproduce_boeck_wb/lost_gene
 cp elegans_constituents_of_lost_og_elegans_group $wkdir/reproduce_boeck_wb/lost_genes_list/elegans_constituents_of_lost_og_elegans_group
 cp elegans_constituents_of_lost_og_sp34 $wkdir/reproduce_boeck_wb/lost_genes_list/elegans_constituents_of_lost_og_sp34
 
-#get all elegans protein coding genes from the canonical protein coding gene set (made from retreived protein set and prepare_protein_sets.sh)
+#get all elegans protein coding genes from the canonical protein coding gene set 'elegans.fa' (made from retreived protein set and prepare_protein_sets.sh)
 
 mkdir $wkdir/reproduce_boeck_wb/elegans_protein_coding_genes
 
-grep ">" /projects/phillipslab/gavincw/lost_protein_project_1-5-17/03_canonical_protein_fasta/elegans.fa > $wkdir/reproduce_boeck_wb/elegans_protein_coding_genes/elegans_prot_list.tmp
+grep ">" elegans.fa > $wkdir/reproduce_boeck_wb/elegans_protein_coding_genes/elegans_prot_list.tmp
 
 
 #remove >
@@ -279,7 +279,6 @@ sed -i -e 's/[a-z]\t/\t/g' elegans_domains
 Rscript $wkdir/scripts/domain_counts.R elegans_domains
 
 # need script merge.pl  which can be found at https://github.com/religa/stats/blob/master/merge
-# cp /projects/phillipslab/gavincw/lost_protein_project_1-5-17/15_determinants_of_gene_loss/merge.pl $wkdir/scripts/merge.pl
 
 #get just protein coding genes
 
@@ -473,26 +472,24 @@ perl $wkdir/scripts/merge.pl -k -e "0" $wkdir/reproduce_boeck_wb/elegans_protein
 
 #three genes have duplicate sequence id's for legacy WormBase and meaningful genetic (i.e., shared promoter in the case of CELEG.ZC416.8) reasons-- these are being removed from the analysis
 
-LC_ALL=C fgrep -w -v -f duplicate_gene_ids wormbase_ontology_counts_tmp > wormbase_ontology_counts_top_tblastn_2-6-19
+LC_ALL=C fgrep -w -v -f duplicate_gene_ids wormbase_ontology_counts_tmp > wormbase_ontology_counts
 
-echo -e "gene_id\t1\tall_lost\telegans_lost\tsp34_lost\tdomain\tlife_stage\tphenotype\treference_count\ttissue\tinteraction" | cat - wormbase_ontology_counts_top_tblastn_2-6-19 > wormbase_ontology_counts_tmp
+echo -e "gene_id\t1\tall_lost\telegans_lost\tsp34_lost\tdomain\tlife_stage\tphenotype\treference_count\ttissue\tinteraction" | cat - wormbase_ontology_counts > wormbase_ontology_counts_tmp
 
-mv wormbase_ontology_counts_tmp wormbase_ontology_counts_top_tblastn_2-6-19
+mv wormbase_ontology_counts_tmp wormbase_ontology_counts
 
 
 #merge lost gene/wormbase/pfam and boeck data
 
 cd $wkdir/reproduce_boeck_wb
 
-perl $wkdir/scripts/merge.pl -k -e "0" wormbase_ontology/wormbase_ontology_counts_top_tblastn_2-6-19 boeck/prep_data/boeck_data 2> merge_pl_error_output_2 > lost_gene_wormbase_boeck_data_tmp &
+perl $wkdir/scripts/merge.pl -k -e "0" wormbase_ontology/wormbase_ontology_counts boeck/prep_data/boeck_data 2> merge_pl_error_output_2 > lost_gene_wormbase_boeck_data_tmp &
 
 #remove genes not in the elegans protein-coding gene set retreived for this study
 
-awk '$2 == "1" {print $0}' lost_gene_wormbase_boeck_data_tmp > lost_gene_wormbase_boeck_data_top_tblastn_2-6-19
-
+awk '$2 == "1" {print $0}' lost_gene_wormbase_boeck_data_tmp > lost_gene_wormbase_boeck_data
 #remove genes with no lost gene, wormbase, or expression information
 
-awk -F'\t' 'NF==45 {print}' lost_gene_wormbase_boeck_data_top_tblastn_2-6-19  > lost_gene_wormbase_boeck_data_tmp
-mv lost_gene_wormbase_boeck_data_tmp lost_gene_wormbase_boeck_data_top_tblastn_2-6-19
+awk -F'\t' 'NF==45 {print}' lost_gene_wormbase_boeck_data > lost_gene_wormbase_boeck_data_tmp
+mv lost_gene_wormbase_boeck_data_tmp lost_gene_wormbase_boeck_data
 
-#19717 genes will be used here
